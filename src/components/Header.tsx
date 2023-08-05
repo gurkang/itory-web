@@ -1,4 +1,3 @@
-import { SignOutButton } from "@clerk/clerk-react";
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
@@ -47,15 +46,14 @@ const Header: React.FC<HeaderProps> = ({ userimage }) => {
               <Link to={"/dashboard"}>Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <SignOutButton>
-                <button
-                  onClick={() => {
-                    nav("/");
-                  }}
-                >
-                  Sign Out
-                </button>
-              </SignOutButton>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  nav("/");
+                }}
+              >
+                Sign Out
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
