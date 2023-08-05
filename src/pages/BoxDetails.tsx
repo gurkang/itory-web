@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Box, useGetSpecificBoxQuery } from "../generated/graphql";
 import EditBoxModal from "../components/EditBoxModal";

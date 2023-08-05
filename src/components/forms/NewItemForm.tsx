@@ -102,7 +102,7 @@ const NewItemForm: React.FC<NewItemFormProps> = () => {
         <FormField
           control={form.control}
           name="boxId"
-          render={({ field }) => (
+          render={({}) => (
             <FormItem>
               <FormLabel>Box</FormLabel>
               <FormControl>

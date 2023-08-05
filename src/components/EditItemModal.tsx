@@ -139,7 +139,7 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
             <FormField
               control={form.control}
               name="boxId"
-              render={({ field }) => (
+              render={({}) => (
                 <FormItem>
                   <FormLabel>Box</FormLabel>
                   <FormControl>
