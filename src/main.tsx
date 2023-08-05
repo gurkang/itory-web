@@ -21,9 +21,6 @@ import BoxDetails from "./pages/BoxDetails.tsx";
 import AuthWrapper from "./components/auth/AuthWrapper.tsx";
 import Login from "./pages/Login.tsx";
 
-if (!import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key");
-}
 const authLink = setContext(async (_, { headers }) => {
   let token = localStorage.getItem("token");
   return {
