@@ -5,7 +5,6 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Profile from "./pages/Profile.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
-import { ClerkProvider, SignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 import {
   ApolloClient,
   ApolloProvider,
@@ -25,8 +24,6 @@ import Login from "./pages/Login.tsx";
 if (!import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
-const clerkPubKey = import.meta.env.VITE_APP_CLERK_PUBLISHABLE_KEY;
-
 const authLink = setContext(async (_, { headers }) => {
   let token = localStorage.getItem("token");
   return {
@@ -58,12 +55,7 @@ const router = createBrowserRouter([
     path: "/profile",
     element: (
       <>
-        <SignedIn>
-          <Profile />
-        </SignedIn>
-        <SignedOut>
-          <SignIn />
-        </SignedOut>
+        <Profile />
       </>
     ),
   },
@@ -71,12 +63,7 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <SignedIn>
-          <Dashboard />
-        </SignedIn>
-        <SignedOut>
-          <SignIn redirectUrl={"/profile"} />
-        </SignedOut>
+        <Dashboard />
       </>
     ),
   },
@@ -84,12 +71,7 @@ const router = createBrowserRouter([
     path: "/item/:id",
     element: (
       <>
-        <SignedIn>
-          <ItemDetails />
-        </SignedIn>
-        <SignedOut>
-          <SignIn redirectUrl={"/profile"} />
-        </SignedOut>
+        <ItemDetails />
       </>
     ),
   },
@@ -97,12 +79,9 @@ const router = createBrowserRouter([
     path: "/items",
     element: (
       <>
-        <SignedIn>
+        <AuthWrapper>
           <Items />
-        </SignedIn>
-        <SignedOut>
-          <SignIn redirectUrl={"/profile"} />
-        </SignedOut>
+        </AuthWrapper>
       </>
     ),
   },
@@ -138,9 +117,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CookiesProvider>
       <ApolloProvider client={client}>
-        <ClerkProvider publishableKey={clerkPubKey}>
-          <RouterProvider router={router} />
-        </ClerkProvider>
+        <RouterProvider router={router} />
       </ApolloProvider>
     </CookiesProvider>
   </React.StrictMode>,

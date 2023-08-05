@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 
 type HeaderProps = {
-  userimage: string;
+  userimage?: string;
 };
 
 const Header: React.FC<HeaderProps> = ({ userimage }) => {
