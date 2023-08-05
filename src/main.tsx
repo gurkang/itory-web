@@ -40,7 +40,7 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: import.meta.env.VITE_APP_GRAPHQL_ENDPOINT || "http://localhost:4000",
 });
 
 const client = new ApolloClient({
