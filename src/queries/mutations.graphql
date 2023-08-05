@@ -1,0 +1,30 @@
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    expiresIn
+  }
+}
+
+mutation UpdateBox($box: UpdateBox!) {
+  updateBox(box: $box) {
+    id
+  }
+}
+
+mutation UpdateItem($updateItemItem: UpdateItem!) {
+  updateItem(item: $updateItemItem) {
+    name
+  }
+}
+
+mutation CreateBox($name: String!, $description: String) {
+  createBox(name: $name, description: $description) {
+    name
+  }
+}
+
+mutation CreateItem($item: NewItem!) {
+  createItem(item: $item) {
+    id
+  }
+}

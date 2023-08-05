@@ -1,0 +1,10 @@
+schema:
+  - "https://sea-turtle-app-7z94v.ondigitalocean.app/" 
+documents:
+  - "./src/queries/*.graphql"
+generates:
+  ./src/generated/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

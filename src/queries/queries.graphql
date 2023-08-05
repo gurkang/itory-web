@@ -1,0 +1,72 @@
+query Me {
+  me {
+    id
+    email
+    name
+    boxes {
+      id
+      description
+      name
+      items {
+        name
+      }
+    }
+  }
+}
+
+query GetSpecificBox($boxId: ID) {
+  me {
+    boxes(boxId: $boxId) {
+      name
+      id
+      description
+      items {
+        id
+        name
+        quantity
+      }
+    }
+  }
+}
+
+query GetBoxes {
+  me {
+    boxes {
+      description
+      id
+      name
+      items {
+        id
+        name
+        quantity
+      }
+    }
+  }
+}
+
+query Items {
+  items {
+    name
+    quantity
+    id
+    box {
+      id
+      name
+    }
+  }
+}
+
+query GetSpecificItem($itemId: ID) {
+  me {
+    items(itemId: $itemId) {
+      name
+      id
+      quantity
+      box {
+        description
+        name
+        id
+      }
+    }
+  }
+}
