@@ -18,7 +18,7 @@ const NewItemModal: React.FC<NewItemModalProps> = () => {
       <DialogTrigger asChild>
         <Button variant="secondary">Add Item</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>New Item</DialogTitle>
           <DialogDescription>

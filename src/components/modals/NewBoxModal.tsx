@@ -60,7 +60,7 @@ const NewBoxModal: React.FC<NewBoxModalProps> = ({}) => {
       <DialogTrigger asChild>
         <Button variant="outline">Add Box</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>New Box</DialogTitle>
           <DialogDescription>
