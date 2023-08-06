@@ -135,7 +135,7 @@ const NewItemForm: React.FC<NewItemFormProps> = () => {
                 </Command>
               </FormControl>
               <FormDescription>
-                Item box (leave empty to remove from box)
+                Item box (leave empty to add to no box)
               </FormDescription>
               <FormMessage />
             </FormItem>
