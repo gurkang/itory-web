@@ -53,7 +53,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
         </div>
         <div className="flex flex-col justify-between gap-2 md:flex-row">
           <EditBoxModal box={box} />
-          <NewItemModal />
+          <NewItemModal boxId={box.id} />
           <QRCodeCanvas
             className="hidden"
             id="qrcode"

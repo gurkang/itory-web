@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -26,7 +26,9 @@ import {
   CommandList,
 } from "../ui/command";
 
-type NewItemFormProps = {};
+type NewItemFormProps = {
+  boxId?: string;
+};
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Must be at least 1 characters long" }),
@@ -34,7 +36,7 @@ const formSchema = z.object({
   boxId: z.string().optional().nullable(),
 });
 
-const NewItemForm: React.FC<NewItemFormProps> = () => {
+const NewItemForm: React.FC<NewItemFormProps> = ({ boxId }) => {
   const [newItem] = useCreateItemMutation();
   const [value, setValue] = React.useState("");
   const { data, loading } = useGetBoxesQuery();
@@ -47,6 +49,17 @@ const NewItemForm: React.FC<NewItemFormProps> = () => {
       boxId: undefined,
     },
   });
+
+  useEffect(() => {
+    if (boxId) {
+      form.setValue("boxId", boxId);
+      setValue(
+        data?.me?.boxes?.find((box) => box?.id === boxId)?.name || "No box",
+      );
+    } else {
+      setValue("No box");
+    }
+  }, []);
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     newItem({

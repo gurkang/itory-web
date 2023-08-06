@@ -10,9 +10,11 @@ import {
 import { Button } from "../ui/button";
 import NewItemForm from "../forms/NewItemForm";
 
-type NewItemModalProps = {};
+type NewItemModalProps = {
+  boxId?: string;
+};
 
-const NewItemModal: React.FC<NewItemModalProps> = () => {
+const NewItemModal: React.FC<NewItemModalProps> = ({ boxId }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -25,7 +27,7 @@ const NewItemModal: React.FC<NewItemModalProps> = () => {
             Add a new item to your inventory
           </DialogDescription>
         </DialogHeader>
-        <NewItemForm />
+        <NewItemForm boxId={boxId} />
       </DialogContent>
     </Dialog>
   );

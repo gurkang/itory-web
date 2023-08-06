@@ -27,14 +27,13 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
-import { DialogClose } from "@radix-ui/react-dialog";
 
 type EditBoxModalProps = {
   box: Box;
 };
 
 const formSchema = z.object({
-  name: z.string().min(3, { message: "Must be at least 3 characters long" }),
+  name: z.string().min(1, { message: "Must be at least 1 characters long" }),
   description: z.string().optional(),
 });
 
@@ -112,31 +111,28 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
                 </FormItem>
               )}
             />
-            <DialogClose asChild>
-              <Button type="submit">Save</Button>
-            </DialogClose>
+
+            <div className="flex justify-between">
+              <Button type="submit">Save changes</Button>
+              <Button
+                variant={"destructive"}
+                onClick={() => {
+                  deleteBox({
+                    variables: {
+                      deleteBoxId: box.id,
+                    },
+                    onCompleted: () => {
+                      window.location.reload();
+                    },
+                  });
+                }}
+              >
+                Delete box
+              </Button>
+            </div>
           </form>
         </Form>
-        <DialogFooter>
-          {/* <Button type="submit">Save changes</Button> */}
-          <div className="flex">
-            <Button
-              variant={"destructive"}
-              onClick={() => {
-                deleteBox({
-                  variables: {
-                    deleteBoxId: box.id,
-                  },
-                  onCompleted: () => {
-                    window.location.reload();
-                  },
-                });
-              }}
-            >
-              Delete box
-            </Button>
-          </div>
-        </DialogFooter>
+        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );
