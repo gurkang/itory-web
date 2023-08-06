@@ -99,11 +99,11 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
       <DialogTrigger asChild>
         <Button variant="outline">Edit</Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
+      <DialogContent className="max-h-screen overflow-y-scroll py-20 sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Edit box</DialogTitle>
+          <DialogTitle>Edit Item</DialogTitle>
           <DialogDescription>
-            Rename your box or change its description.
+            Edit the item <strong>{item.name}</strong>
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
