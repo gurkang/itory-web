@@ -73,9 +73,9 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
       },
       onCompleted: (data) => {
         console.log(data);
+        window.location.reload();
       },
     });
-    window.location.reload();
   };
 
   useEffect(() => {

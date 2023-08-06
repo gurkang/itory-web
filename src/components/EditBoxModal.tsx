@@ -13,7 +13,11 @@ import { Input } from "./ui/input";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, useUpdateBoxMutation } from "../generated/graphql";
+import {
+  Box,
+  useDeleteBoxMutation,
+  useUpdateBoxMutation,
+} from "../generated/graphql";
 import {
   Form,
   FormControl,
@@ -36,6 +40,7 @@ const formSchema = z.object({
 
 const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
   const [updateBox] = useUpdateBoxMutation();
+  const [deleteBox] = useDeleteBoxMutation();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,9 +61,9 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
       },
       onCompleted: (data) => {
         console.log(data);
+        window.location.reload();
       },
     });
-    window.location.reload();
   };
 
   return (
@@ -109,12 +114,29 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
               )}
             />
             <DialogClose asChild>
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Save</Button>
             </DialogClose>
           </form>
         </Form>
         <DialogFooter>
           {/* <Button type="submit">Save changes</Button> */}
+          <div className="flex">
+            <Button
+              variant={"destructive"}
+              onClick={() => {
+                deleteBox({
+                  variables: {
+                    deleteBoxId: box.id,
+                  },
+                  onCompleted: () => {
+                    window.location.reload();
+                  },
+                });
+              }}
+            >
+              Delete box
+            </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>

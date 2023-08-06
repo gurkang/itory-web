@@ -28,3 +28,7 @@ mutation CreateItem($item: NewItem!) {
     id
   }
 }
+
+mutation DeleteBox($deleteBoxId: ID!) {
+  deleteBox(id: $deleteBoxId)
+}

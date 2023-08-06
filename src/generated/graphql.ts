@@ -190,6 +190,13 @@ export type CreateItemMutationVariables = Exact<{
 
 export type CreateItemMutation = { __typename?: 'Mutation', createItem?: { __typename?: 'Item', id: string } | null };
 
+export type DeleteBoxMutationVariables = Exact<{
+  deleteBoxId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteBoxMutation = { __typename?: 'Mutation', deleteBox?: boolean | null };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -388,6 +395,37 @@ export function useCreateItemMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateItemMutationHookResult = ReturnType<typeof useCreateItemMutation>;
 export type CreateItemMutationResult = Apollo.MutationResult<CreateItemMutation>;
 export type CreateItemMutationOptions = Apollo.BaseMutationOptions<CreateItemMutation, CreateItemMutationVariables>;
+export const DeleteBoxDocument = gql`
+    mutation DeleteBox($deleteBoxId: ID!) {
+  deleteBox(id: $deleteBoxId)
+}
+    `;
+export type DeleteBoxMutationFn = Apollo.MutationFunction<DeleteBoxMutation, DeleteBoxMutationVariables>;
+
+/**
+ * __useDeleteBoxMutation__
+ *
+ * To run a mutation, you first call `useDeleteBoxMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBoxMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBoxMutation, { data, loading, error }] = useDeleteBoxMutation({
+ *   variables: {
+ *      deleteBoxId: // value for 'deleteBoxId'
+ *   },
+ * });
+ */
+export function useDeleteBoxMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBoxMutation, DeleteBoxMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBoxMutation, DeleteBoxMutationVariables>(DeleteBoxDocument, options);
+      }
+export type DeleteBoxMutationHookResult = ReturnType<typeof useDeleteBoxMutation>;
+export type DeleteBoxMutationResult = Apollo.MutationResult<DeleteBoxMutation>;
+export type DeleteBoxMutationOptions = Apollo.BaseMutationOptions<DeleteBoxMutation, DeleteBoxMutationVariables>;
 export const MeDocument = gql`
     query Me {
   me {
