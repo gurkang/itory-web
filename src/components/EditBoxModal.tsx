@@ -68,7 +68,7 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Box</Button>
+        <Button variant="secondary">Edit Box</Button>
       </DialogTrigger>
       <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
         <DialogHeader>

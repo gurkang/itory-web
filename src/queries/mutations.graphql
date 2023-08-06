@@ -32,3 +32,13 @@ mutation CreateItem($item: NewItem!) {
 mutation DeleteBox($deleteBoxId: ID!) {
   deleteBox(id: $deleteBoxId)
 }
+
+mutation Register($user: UserRegister!) {
+  register(user: $user) {
+    token
+  }
+}
+
+mutation DeleteItem($deleteItemId: ID!) {
+  deleteItem(id: $deleteItemId)
+}

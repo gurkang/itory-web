@@ -13,16 +13,24 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { useRegisterMutation } from "../../generated/graphql";
+import { useNavigate } from "react-router-dom";
+import { Toaster } from "../ui/toaster";
+import { useToast } from "../ui/use-toast";
 
 type SignupFormProps = {};
 
 const formSchema = z.object({
-  email: z.string(),
+  email: z.string().email(),
   password: z.string(),
   passwordTwo: z.string(),
 });
 
 const SignupForm: React.FC<SignupFormProps> = () => {
+  const [register] = useRegisterMutation();
+  const { toast } = useToast();
+  const nav = useNavigate();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,10 +41,25 @@ const SignupForm: React.FC<SignupFormProps> = () => {
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+    register({
+      variables: {
+        user: {
+          email: data.email,
+          password: data.password,
+        },
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+      onCompleted: async (data) => {
+        localStorage.setItem("token", data.register!.token);
+        nav("/boxes");
+      },
+    });
   };
   return (
     <Form {...form}>
+      <Toaster />
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
@@ -75,12 +98,14 @@ const SignupForm: React.FC<SignupFormProps> = () => {
               <FormControl>
                 <Input placeholder="password" type="password" {...field} />
               </FormControl>
-              <FormDescription>Password</FormDescription>
+              <FormDescription>
+                Please enter your password again
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Register</Button>
       </form>
     </Form>
   );

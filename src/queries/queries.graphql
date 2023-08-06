@@ -29,6 +29,10 @@ query GetSpecificBox($boxId: ID) {
   }
 }
 
+query Auth {
+  auth
+}
+
 query GetBoxes {
   me {
     boxes {

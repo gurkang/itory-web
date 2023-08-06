@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetBoxesQuery } from "../../generated/graphql";
+import { useAuthQuery } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 
 type AuthWrapperProps = {
@@ -8,7 +8,7 @@ type AuthWrapperProps = {
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
   const nav = useNavigate();
-  const { error, loading } = useGetBoxesQuery();
+  const { error, loading } = useAuthQuery();
   if (loading) {
     return <div>Loading...</div>;
   }

@@ -34,8 +34,10 @@ const Boxes: React.FC<BoxesProps> = () => {
 
   return (
     <Layout>
-      <BoxSearchBox />
-      <NewBoxModal />
+      <div className="flex gap-2">
+        <BoxSearchBox />
+        <NewBoxModal />
+      </div>
       <div className="mt-5 flex w-full max-w-6xl flex-col items-center gap-2 pb-10">
         <div className="flex w-11/12 justify-end"></div>
         {filteredBoxes &&

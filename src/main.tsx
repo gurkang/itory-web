@@ -52,7 +52,9 @@ const router = createBrowserRouter([
     path: "/profile",
     element: (
       <>
-        <Profile />
+        <AuthWrapper>
+          <Profile />
+        </AuthWrapper>
       </>
     ),
   },
@@ -60,7 +62,9 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <>
-        <Dashboard />
+        <AuthWrapper>
+          <Dashboard />
+        </AuthWrapper>
       </>
     ),
   },
@@ -68,7 +72,9 @@ const router = createBrowserRouter([
     path: "/item/:id",
     element: (
       <>
-        <ItemDetails />
+        <AuthWrapper>
+          <ItemDetails />
+        </AuthWrapper>
       </>
     ),
   },
@@ -96,7 +102,9 @@ const router = createBrowserRouter([
     path: "/boxes/:id",
     element: (
       <>
-        <BoxDetails />
+        <AuthWrapper>
+          <BoxDetails />
+        </AuthWrapper>
       </>
     ),
   },

@@ -19,7 +19,7 @@ const Items: React.FC<ItemsProps> = () => {
   if (loading) {
     return (
       <Layout>
-        <div>Loading...</div>;
+        <div>Loading...</div>
       </Layout>
     );
   }

@@ -101,6 +101,7 @@ export type NewItem = {
 
 export type Query = {
   __typename?: 'Query';
+  auth?: Maybe<Scalars['Boolean']['output']>;
   boxes?: Maybe<Array<Maybe<Box>>>;
   items?: Maybe<Array<Maybe<Item>>>;
   me?: Maybe<User>;
@@ -197,6 +198,20 @@ export type DeleteBoxMutationVariables = Exact<{
 
 export type DeleteBoxMutation = { __typename?: 'Mutation', deleteBox?: boolean | null };
 
+export type RegisterMutationVariables = Exact<{
+  user: UserRegister;
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'JWT', token: string } | null };
+
+export type DeleteItemMutationVariables = Exact<{
+  deleteItemId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteItemMutation = { __typename?: 'Mutation', deleteItem?: boolean | null };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -208,6 +223,11 @@ export type GetSpecificBoxQueryVariables = Exact<{
 
 
 export type GetSpecificBoxQuery = { __typename?: 'Query', me?: { __typename?: 'User', boxes?: Array<{ __typename?: 'Box', name: string, id: string, description?: string | null, items?: Array<{ __typename?: 'Item', id: string, name: string, quantity: number } | null> | null } | null> | null } | null };
+
+export type AuthQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AuthQuery = { __typename?: 'Query', auth?: boolean | null };
 
 export type GetBoxesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -426,6 +446,70 @@ export function useDeleteBoxMutation(baseOptions?: Apollo.MutationHookOptions<De
 export type DeleteBoxMutationHookResult = ReturnType<typeof useDeleteBoxMutation>;
 export type DeleteBoxMutationResult = Apollo.MutationResult<DeleteBoxMutation>;
 export type DeleteBoxMutationOptions = Apollo.BaseMutationOptions<DeleteBoxMutation, DeleteBoxMutationVariables>;
+export const RegisterDocument = gql`
+    mutation Register($user: UserRegister!) {
+  register(user: $user) {
+    token
+  }
+}
+    `;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+
+/**
+ * __useRegisterMutation__
+ *
+ * To run a mutation, you first call `useRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerMutation, { data, loading, error }] = useRegisterMutation({
+ *   variables: {
+ *      user: // value for 'user'
+ *   },
+ * });
+ */
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
+      }
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const DeleteItemDocument = gql`
+    mutation DeleteItem($deleteItemId: ID!) {
+  deleteItem(id: $deleteItemId)
+}
+    `;
+export type DeleteItemMutationFn = Apollo.MutationFunction<DeleteItemMutation, DeleteItemMutationVariables>;
+
+/**
+ * __useDeleteItemMutation__
+ *
+ * To run a mutation, you first call `useDeleteItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteItemMutation, { data, loading, error }] = useDeleteItemMutation({
+ *   variables: {
+ *      deleteItemId: // value for 'deleteItemId'
+ *   },
+ * });
+ */
+export function useDeleteItemMutation(baseOptions?: Apollo.MutationHookOptions<DeleteItemMutation, DeleteItemMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteItemMutation, DeleteItemMutationVariables>(DeleteItemDocument, options);
+      }
+export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutation>;
+export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>;
+export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -514,6 +598,38 @@ export function useGetSpecificBoxLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetSpecificBoxQueryHookResult = ReturnType<typeof useGetSpecificBoxQuery>;
 export type GetSpecificBoxLazyQueryHookResult = ReturnType<typeof useGetSpecificBoxLazyQuery>;
 export type GetSpecificBoxQueryResult = Apollo.QueryResult<GetSpecificBoxQuery, GetSpecificBoxQueryVariables>;
+export const AuthDocument = gql`
+    query Auth {
+  auth
+}
+    `;
+
+/**
+ * __useAuthQuery__
+ *
+ * To run a query within a React component, call `useAuthQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAuthQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAuthQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAuthQuery(baseOptions?: Apollo.QueryHookOptions<AuthQuery, AuthQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AuthQuery, AuthQueryVariables>(AuthDocument, options);
+      }
+export function useAuthLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AuthQuery, AuthQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AuthQuery, AuthQueryVariables>(AuthDocument, options);
+        }
+export type AuthQueryHookResult = ReturnType<typeof useAuthQuery>;
+export type AuthLazyQueryHookResult = ReturnType<typeof useAuthLazyQuery>;
+export type AuthQueryResult = Apollo.QueryResult<AuthQuery, AuthQueryVariables>;
 export const GetBoxesDocument = gql`
     query GetBoxes {
   me {

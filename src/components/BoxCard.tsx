@@ -36,8 +36,10 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
           </p>
           <p className="text-sm text-gray-500">{box.description}</p>
         </div>
-
-        <EditBoxModal box={box} />
+        <div className="flex flex-col justify-between gap-2 md:flex-row">
+          <EditBoxModal box={box} />
+          <NewItemModal />
+        </div>
       </div>
       <Collapsible>
         <CollapsibleTrigger onClick={() => setCollapsed(!collapsed)}>
@@ -98,9 +100,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
               ))}
             </TableBody>
           </Table>
-          <div className="flex justify-end pt-4">
-            <NewItemModal />
-          </div>
+          <div className="flex justify-end pt-4"></div>
         </CollapsibleContent>
       </Collapsible>
     </div>

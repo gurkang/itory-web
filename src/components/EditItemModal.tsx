@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Item,
+  useDeleteItemMutation,
   useGetBoxesQuery,
   useUpdateItemMutation,
 } from "../generated/graphql";
@@ -49,7 +50,7 @@ const formSchema = z.object({
 const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
   const [value, setValue] = React.useState("");
   const { data, loading } = useGetBoxesQuery();
-
+  const [deleteItem] = useDeleteItemMutation();
   const [updateBox] = useUpdateItemMutation();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -177,7 +178,24 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Save</Button>
+            <div className="flex justify-between">
+              <Button type="submit">Save</Button>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  deleteItem({
+                    variables: {
+                      deleteItemId: item.id,
+                    },
+                    onCompleted: () => {
+                      window.location.reload();
+                    },
+                  });
+                }}
+              >
+                Delete
+              </Button>
+            </div>
           </form>
         </Form>
       </DialogContent>
