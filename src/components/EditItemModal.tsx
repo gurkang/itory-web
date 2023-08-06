@@ -71,15 +71,13 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
           boxId: data.boxId,
         },
       },
-      onCompleted: (data) => {
-        console.log(data);
+      onCompleted: () => {
         window.location.reload();
       },
     });
   };
 
   useEffect(() => {
-    console.log("boxId", boxId);
     if (boxId) {
       form.setValue("boxId", boxId);
       setValue(
@@ -99,7 +97,7 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ item, boxId }) => {
       <DialogTrigger asChild>
         <Button variant="outline">Edit</Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-scroll py-20 sm:max-w-[425px]">
+      <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Edit Item</DialogTitle>
           <DialogDescription>

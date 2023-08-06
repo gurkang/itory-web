@@ -42,14 +42,12 @@ const NewBoxModal: React.FC<NewBoxModalProps> = ({}) => {
   });
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
     createBox({
       variables: {
         name: data.name,
         description: data.description,
       },
-      onCompleted: (data) => {
-        console.log(data);
+      onCompleted: () => {
         window.location.reload();
       },
     });

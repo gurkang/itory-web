@@ -57,8 +57,7 @@ const NewItemForm: React.FC<NewItemFormProps> = () => {
           boxId: data.boxId,
         },
       },
-      onCompleted: (data) => {
-        console.log(data);
+      onCompleted: () => {
         window.location.reload();
       },
     });

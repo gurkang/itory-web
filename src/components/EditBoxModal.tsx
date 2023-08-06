@@ -59,8 +59,7 @@ const EditBoxModal: React.FC<EditBoxModalProps> = ({ box }) => {
           description: data.description,
         },
       },
-      onCompleted: (data) => {
-        console.log(data);
+      onCompleted: () => {
         window.location.reload();
       },
     });
