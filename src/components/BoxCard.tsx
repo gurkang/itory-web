@@ -16,8 +16,8 @@ import {
 import NewItemModal from "./modals/NewItemModal";
 import EditItemModal from "./EditItemModal";
 import EditBoxModal from "./EditBoxModal";
-import QRCode from "react-qr-code";
 import { Button } from "./ui/button";
+import { QRCodeCanvas } from "qrcode.react";
 
 type BoxCardProps = {
   box: Box;
@@ -56,7 +56,8 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
           <EditBoxModal box={box} />
           <NewItemModal />
         </div>
-        <QRCode id="qrcode" level="H" value={box.id} size={100} />
+
+        <QRCodeCanvas id="qrcode" level="H" value={box.id} size={100} />
         <Button onClick={downloadQRCode}>Download QR</Button>
       </div>
       <Collapsible>
