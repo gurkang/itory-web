@@ -59,7 +59,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
             id="qrcode"
             value={`${import.meta.env.VITE_APP_HOSTED_DOMAIN_NAME}/boxes/${
               box.id
-            }}`}
+            }`}
             size={300}
             includeMargin={true}
           />
