@@ -17,7 +17,6 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ userimage }) => {
-  const nav = useNavigate();
   const { data, error, loading } = useAuthQuery();
 
   if (loading) {
