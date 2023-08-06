@@ -25,7 +25,6 @@ type BoxCardProps = {
 
 const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
   const [collapsed, setCollapsed] = React.useState(false);
-
   const downloadQRCode = () => {
     const canvas = document.getElementById("qrcode") as HTMLCanvasElement;
     if (!canvas) throw new Error("Canvas not found");
@@ -34,7 +33,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
       .replace("image/png", "image/octet-stream");
     let downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
-    downloadLink.download = `${box.id}.png`;
+    downloadLink.download = `${box.name}.png`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -55,10 +54,17 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
         <div className="flex flex-col justify-between gap-2 md:flex-row">
           <EditBoxModal box={box} />
           <NewItemModal />
+          <QRCodeCanvas
+            className=""
+            id="qrcode"
+            value={`${import.meta.env.VITE_APP_HOSTED_DOMAIN_NAME}/box/${
+              box.id
+            }}`}
+            size={300}
+            includeMargin={true}
+          />
+          <Button onClick={downloadQRCode}>Download QR for box</Button>
         </div>
-
-        <QRCodeCanvas id="qrcode" level="H" value={box.id} size={100} />
-        <Button onClick={downloadQRCode}>Download QR</Button>
       </div>
       <Collapsible>
         <CollapsibleTrigger onClick={() => setCollapsed(!collapsed)}>
