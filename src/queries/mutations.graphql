@@ -2,6 +2,7 @@ mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
     token
     expiresIn
+    username
   }
 }
 
@@ -36,6 +37,7 @@ mutation DeleteBox($deleteBoxId: ID!) {
 mutation Register($user: UserRegister!) {
   register(user: $user) {
     token
+    username
   }
 }
 

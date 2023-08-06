@@ -37,6 +37,7 @@ export type Jwt = {
   __typename?: 'JWT';
   expiresIn: Scalars['String']['output'];
   token: Scalars['String']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type Mutation = {
@@ -160,7 +161,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'JWT', token: string, expiresIn: string } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'JWT', token: string, expiresIn: string, username: string } | null };
 
 export type UpdateBoxMutationVariables = Exact<{
   box: UpdateBox;
@@ -203,7 +204,7 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'JWT', token: string } | null };
+export type RegisterMutation = { __typename?: 'Mutation', register?: { __typename?: 'JWT', token: string, username: string } | null };
 
 export type DeleteItemMutationVariables = Exact<{
   deleteItemId: Scalars['ID']['input'];
@@ -252,6 +253,7 @@ export const LoginDocument = gql`
   login(email: $email, password: $password) {
     token
     expiresIn
+    username
   }
 }
     `;
@@ -450,6 +452,7 @@ export const RegisterDocument = gql`
     mutation Register($user: UserRegister!) {
   register(user: $user) {
     token
+    username
   }
 }
     `;

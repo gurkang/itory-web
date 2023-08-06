@@ -52,6 +52,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       onCompleted: (data) => {
         setErrors([]);
         localStorage.setItem("token", data.login!.token);
+        localStorage.setItem("username", data.login!.username);
         nav("/boxes");
       },
     });

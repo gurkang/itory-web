@@ -56,7 +56,9 @@ const Header: React.FC<HeaderProps> = ({ userimage }) => {
           <DropdownMenuTrigger>
             <Avatar>
               <AvatarImage src={userimage} />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarFallback>
+                {localStorage.getItem("username")![0].toUpperCase()}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

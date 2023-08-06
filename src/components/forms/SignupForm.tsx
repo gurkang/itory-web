@@ -51,6 +51,7 @@ const SignupForm: React.FC<SignupFormProps> = () => {
       },
       onCompleted: async (data) => {
         localStorage.setItem("token", data.register!.token);
+        localStorage.setItem("username", data.register!.username);
         nav("/boxes");
       },
     });
