@@ -55,7 +55,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
           <EditBoxModal box={box} />
           <NewItemModal />
           <QRCodeCanvas
-            className=""
+            className="hidden"
             id="qrcode"
             value={`${import.meta.env.VITE_APP_HOSTED_DOMAIN_NAME}/box/${
               box.id
