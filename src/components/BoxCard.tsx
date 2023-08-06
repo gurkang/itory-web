@@ -16,6 +16,8 @@ import {
 import NewItemModal from "./modals/NewItemModal";
 import EditItemModal from "./EditItemModal";
 import EditBoxModal from "./EditBoxModal";
+import QRCode from "react-qr-code";
+import { Button } from "./ui/button";
 
 type BoxCardProps = {
   box: Box;
@@ -23,6 +25,20 @@ type BoxCardProps = {
 
 const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
   const [collapsed, setCollapsed] = React.useState(false);
+
+  const downloadQRCode = () => {
+    const canvas = document.getElementById("qrcode") as HTMLCanvasElement;
+    if (!canvas) throw new Error("Canvas not found");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `${box.id}.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 
   return (
     <div className="flex w-11/12 flex-col rounded-md bg-white p-2 shadow-md">
@@ -40,6 +56,8 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
           <EditBoxModal box={box} />
           <NewItemModal />
         </div>
+        <QRCode id="qrcode" level="H" value={box.id} size={100} />
+        <Button onClick={downloadQRCode}>Download QR</Button>
       </div>
       <Collapsible>
         <CollapsibleTrigger onClick={() => setCollapsed(!collapsed)}>
