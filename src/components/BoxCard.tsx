@@ -57,7 +57,7 @@ const BoxCard: React.FC<BoxCardProps> = ({ box }) => {
           <QRCodeCanvas
             className="hidden"
             id="qrcode"
-            value={`${import.meta.env.VITE_APP_HOSTED_DOMAIN_NAME}/box/${
+            value={`${import.meta.env.VITE_APP_HOSTED_DOMAIN_NAME}/boxes/${
               box.id
             }}`}
             size={300}
