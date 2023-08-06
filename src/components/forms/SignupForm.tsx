@@ -16,7 +16,6 @@ import { Input } from "../ui/input";
 import { useRegisterMutation } from "../../generated/graphql";
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "../ui/toaster";
-import { useToast } from "../ui/use-toast";
 
 type SignupFormProps = {};
 
@@ -28,7 +27,6 @@ const formSchema = z.object({
 
 const SignupForm: React.FC<SignupFormProps> = () => {
   const [register] = useRegisterMutation();
-  const { toast } = useToast();
   const nav = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
